@@ -1,0 +1,35 @@
+.Blog-Main-Content {
+  min-width: 700px;
+  width: 70%;
+  margin: 0 2rem;
+}
+
+.Blog-Side-Content {
+  min-width: 300px;
+  width: 20%;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  row-gap: 2rem;
+}
+
+@media (max-width: 1279px) {
+  .Blog-Side-Content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+    width: 70%;
+  }
+
+  .Blog-Main-Content {
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .Blog-Main-Content {
+    width: 90%;
+  }
+
+  .Blog-Side-Content {
+    width: 90%;
+  }
+}
