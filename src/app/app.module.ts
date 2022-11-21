@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -13,6 +12,10 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { SingleCategoryComponent } from './pages/single-category/single-category.component';
 import { AboutComponent } from './pages/about/about.component';
 import { SubscriptionFormComponent } from './components/subscription-form/subscription-form.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {environment} from "../environments/environment";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +29,14 @@ import { SubscriptionFormComponent } from './components/subscription-form/subscr
     ContactComponent,
     SingleCategoryComponent,
     AboutComponent,
-    SubscriptionFormComponent
+    SubscriptionFormComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
