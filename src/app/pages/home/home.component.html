@@ -1,4 +1,4 @@
-<section class="w-full bg-gray-900">
+<section *ngIf="featuredListLength" class="w-full bg-gray-900">
   <div class="container relative flex flex-col px-6 py-8 mx-auto">
     <div class="flex ">
       <div class="flex flex-col w-full pt-16">
@@ -24,45 +24,56 @@
 
   <div class="container px-6 py-3 mx-auto">
     <div class="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
-      <div>
+
+
+      <div *ngFor="let f of featuredList" [routerLink]="['/post', f.id]" class="cursor-pointer">
         <img class="relative z-10 object-cover w-full rounded-md h-96"
-             src="https://images.unsplash.com/photo-1644018335954-ab54c83e007f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+             src="{{f.data.postImgPath}}"
              alt="">
 
-        <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow bg-gray-700">
+        <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 rounded-md shadow bg-gray-700">
           <a href="#" class="font-semibold hover:underline text-white md:text-xl">
-            All the features you want to know
+            {{f.data.title}}
           </a>
 
           <p class="mt-3 text-sm text-gray-300 md:text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veritatis sint autem nesciunt,
-            laudantium quia tempore delect
+            {{f.data.excerpt}}
           </p>
 
-          <p class="mt-3 text-sm text-blue-500">21 October 2019</p>
+          <p class="mt-3 text-sm flex justify-between"><span class="text-blue-500">{{f.data.createdAt.toMillis() | date}}</span></p>
         </div>
       </div>
 
-      <div>
-        <img class="relative z-10 object-cover w-full rounded-md h-96"
-             src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-             alt="">
 
-        <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow bg-gray-700">
-          <a href="#" class="font-semibold hover:underline text-white md:text-xl">
-            How to use sticky note for problem solving
-          </a>
-
-          <p class="mt-3 text-sm text-gray-300 md:text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure veritatis sint autem nesciunt,
-            laudantium quia tempore delect
-          </p>
-
-          <p class="mt-3 text-sm text-blue-500">20 October 2019</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <app-categories></app-categories>
+
+<section class="bg-gray-900">
+  <div class="container px-6 py-10 mx-auto">
+    <h1 class="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">Post List
+    </h1>
+
+    <p class="mt-4 text-center text-gray-500 dark:text-gray-300">
+      Check All Of Our Post At Here, Find Out You Like
+    </p>
+
+    <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
+
+      <div *ngFor="let post of postList; let i = index" [routerLink]="['/post', post.id]" class="overflow-hidden bg-cover bg-center rounded-lg cursor-pointer h-96 group"
+           style="background-image:url({{post.data.postImgPath}})">
+        <div
+          class="flex flex-col justify-center w-full h-full px-8 py-4 transition-opacity duration-700 opacity-0 backdrop-blur-sm bg-gray-800/60 group-hover:opacity-100">
+          <h2 class="mt-4 text-2xl font-semibold text-white capitalize">{{post.data.title}}</h2>
+          <p class="mt-2 text-lg tracking-wider text-white uppercase ">{{post.data.category.category}}</p>
+          <p class="mt-2 text-lg tracking-wider text-blue-200 uppercase ">{{post.data.createdAt.toMillis() | date}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+

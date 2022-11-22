@@ -7,9 +7,8 @@
 .Blog-Side-Content {
   min-width: 300px;
   width: 20%;
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  row-gap: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 1279px) {

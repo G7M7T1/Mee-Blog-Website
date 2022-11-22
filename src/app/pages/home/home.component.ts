@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PostsService} from "../../services/posts.service";
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
+  featuredList: Array<any> | undefined
+  featuredListLength: number | undefined
+  postList: Array<any> | undefined
+
+  constructor(private postService: PostsService) {
+    this.postService.loadFeaturedData().subscribe(value => {
+      this.featuredList = value
+      this.featuredListLength = this.featuredList.length
+    })
+
+    this.postService.loadLatest().subscribe(value => {
+      this.postList = value
+    })
+  }
 
   ngOnInit(): void {
   }

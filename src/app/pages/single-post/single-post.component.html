@@ -1,106 +1,40 @@
-<div class="flex justify-center pt-16">
+<div *ngIf="postData" class="flex justify-center pt-16">
   <div class="bg-gray-900 text-gray-100 flex flex-wrap justify-center container">
 
     <div class="Blog-Main-Content flex flex-col overflow-hidden rounded">
-      <img src="https://source.unsplash.com/random/480x360" alt="" class="object-cover w-full h-60 sm:h-96 bg-gray-900">
+      <img src="{{postData.postImgPath}}" alt="" class="object-cover w-full h-60 sm:h-96 bg-gray-900">
       <div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-700">
         <div class="space-y-2">
-          <a rel="noopener noreferrer" href="#" class="inline-block text-2xl font-semibold sm:text-3xl">The Best
-            Activewear from the Nordstrom Anniversary Sale</a>
-          <p class="text-xs dark:text-gray-400">By
-            <a rel="noopener noreferrer" href="#" class="text-xs hover:underline">Leroy Jenkins</a>
+          <a rel="noopener noreferrer" href="#" class="inline-block text-2xl font-semibold sm:text-3xl">{{postData.title}}</a>
+          <p class="text-xs dark:text-gray-400">Date
+            <a rel="noopener noreferrer" href="#" class="text-xs hover:underline">{{postData.createdAt.toMillis() | date}}</a>
           </p>
         </div>
       </div>
 
       <div class="pt-6">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum minus nulla possimus quam quas sint veritatis
-          voluptate. Delectus deleniti deserunt illo, illum iste maiores nemo omnis quos saepe similique
-          voluptatibus?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequuntur dolor doloremque eos
-          explicabo harum ipsam laboriosam obcaecati optio pariatur porro quidem, reiciendis rem sapiente sunt ullam
-          unde veritatis voluptatibus.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias amet aperiam blanditiis consectetur,
-          delectus deleniti dolor dolore dolores et fugit illo laboriosam libero necessitatibus nihil nisi perspiciatis
-          quas quo quod recusandae reiciendis repellendus sunt ut voluptas voluptate voluptatibus voluptatum? Aperiam
-          consequuntur dolor doloremque ea eaque earum facere hic illum inventore nesciunt, nulla perspiciatis qui quo
-          ratione repellendus rerum, unde. Animi, debitis in ipsam nisi perspiciatis veniam? A ad alias animi aspernatur
-          ducimus eius impedit optio. Animi autem corporis cum, ea eveniet excepturi facere in iusto laboriosam maiores
-          modi neque nisi quaerat quam quas quia quibusdam quis recusandae rem repellendus saepe unde ut velit veniam,
-          vero vitae voluptatibus! Alias beatae consectetur culpa cumque id incidunt magni officiis omnis quibusdam
-          velit. Beatae cumque dolore dolores eveniet quisquam saepe, voluptates? Architecto debitis, dignissimos
-          dolores ducimus eveniet exercitationem expedita, harum libero nihil nostrum recusandae reiciendis rem rerum
-          sequi tempore. Atque dolores explicabo harum rerum vel. Accusamus aliquam aliquid aspernatur aut beatae,
-          debitis deleniti dignissimos dolore doloremque ea enim est fuga fugit id illum ipsa iste iure libero mollitia
-          nesciunt nisi numquam omnis possimus quia, reiciendis repellat rerum ut vel voluptatem voluptates. Aliquam at
-          error est expedita qui tempore. Aut dolore id omnis reprehenderit.</p>
+        <p [innerHtml]="postData.content"></p>
       </div>
     </div>
-    <div class="Blog-Side-Content mt-16 mx-auto">
-      <article class="flex flex-col bg-gray-700">
-        <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-          <img alt="" class="object-cover w-full h-52 dark:bg-gray-500"
-               src="https://source.unsplash.com/200x200/?fashion?1">
+    <div *ngIf="NewPost" class="Blog-Side-Content mt-16 mx-auto flex">
+
+
+      <article [routerLink]="['/post', singlePost.id]" *ngFor="let singlePost of NewPost" style="max-height: 350px" class="flex flex-col bg-gray-700 m-3">
+        <a rel="noopener noreferrer" aria-label="Te nulla oportere reprimique his dolorum">
+          <img class="object-cover w-full h-52 bg-gray-500"
+               src="{{singlePost.data.postImgPath}}">
         </a>
         <div class="flex flex-col flex-1 p-6">
-          <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
-          <a rel="noopener noreferrer" href="#"
-             class="text-xs tracking-wider uppercase hover:underline dark:text-purple-400">Convenire</a>
-          <h3 class="flex-1 py-2 text-lg font-semibold leading-snug">Te nulla oportere reprimique his dolorum</h3>
-          <div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-            <span>June 1, 2020</span>
-            <span>2.1K views</span>
+          <p class="text-xs tracking-wider uppercase hover:underline text-purple-400">{{singlePost.data.category.category}}</p>
+          <h3 class="flex-1 py-2 text-lg font-semibold leading-snug">{{singlePost.data.title}}</h3>
+          <div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs text-gray-400">
+            <span>{{singlePost.data.createdAt.toMillis() | date}}</span>
+            <span>{{singlePost.data.views}} views</span>
           </div>
         </div>
       </article>
-      <article class="flex flex-col bg-gray-700">
-        <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-          <img alt="" class="object-cover w-full h-52 dark:bg-gray-500"
-               src="https://source.unsplash.com/200x200/?fashion?2">
-        </a>
-        <div class="flex flex-col flex-1 p-6">
-          <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
-          <a rel="noopener noreferrer" href="#"
-             class="text-xs tracking-wider uppercase hover:underline dark:text-purple-400">Convenire</a>
-          <h3 class="flex-1 py-2 text-lg font-semibold leading-snug">Te nulla oportere reprimique his dolorum</h3>
-          <div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-            <span>June 2, 2020</span>
-            <span>2.2K views</span>
-          </div>
-        </div>
-      </article>
-      <article class="flex flex-col bg-gray-700">
-        <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-          <img alt="" class="object-cover w-full h-52 dark:bg-gray-500"
-               src="https://source.unsplash.com/200x200/?fashion?3">
-        </a>
-        <div class="flex flex-col flex-1 p-6">
-          <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
-          <a rel="noopener noreferrer" href="#"
-             class="text-xs tracking-wider uppercase hover:underline dark:text-purple-400">Convenire</a>
-          <h3 class="flex-1 py-2 text-lg font-semibold leading-snug">Te nulla oportere reprimique his dolorum</h3>
-          <div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-            <span>June 3, 2020</span>
-            <span>2.3K views</span>
-          </div>
-        </div>
-      </article>
-      <article class="flex flex-col bg-gray-700">
-        <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
-          <img alt="" class="object-cover w-full h-52 dark:bg-gray-500"
-               src="https://source.unsplash.com/200x200/?fashion?4">
-        </a>
-        <div class="flex flex-col flex-1 p-6">
-          <a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
-          <a rel="noopener noreferrer" href="#"
-             class="text-xs tracking-wider uppercase hover:underline dark:text-purple-400">Convenire</a>
-          <h3 class="flex-1 py-2 text-lg font-semibold leading-snug">Te nulla oportere reprimique his dolorum</h3>
-          <div class="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
-            <span>June 4, 2020</span>
-            <span>2.4K views</span>
-          </div>
-        </div>
-      </article>
+
+
     </div>
   </div>
 </div>
